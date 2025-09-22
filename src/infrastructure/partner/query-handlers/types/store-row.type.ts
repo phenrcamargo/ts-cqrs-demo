@@ -1,0 +1,21 @@
+export type StoreRow = {
+  id: string;
+  chainId: string;
+  name: string;
+  description: string;
+  phone: string;
+  documentValue: string;
+  documentType: number;
+  documentCountry: number;
+  addressNumber: number;
+  addressStreet: string;
+  addressCity: string;
+  addressState: string;
+  addressCountry: string;
+  addressZipCode: string;
+  addressLatitude?: number;
+  addressLongitude?: number;
+  createdAt: Date;
+  updatedAt?: Date;
+  disabledAt?: Date;
+};

@@ -1,0 +1,202 @@
+## API Documentation
+## This document outlines the API endpoints for managing partners, companies, chains, and stores.
+
+## Partners
+# Return all partners
+GET http://localhost:3000/v1/partners
+
+###
+
+# Return specific partner
+GET http://localhost:3000/v1/partners/{{partnerId}}
+
+###
+
+# Create a partner
+# @name createPartner
+POST http://localhost:3000/v1/partners
+content-type: application/json
+
+{
+    "document": {
+        "value": "02952561000169",
+        "countryCode": 1058,
+        "typeCode": 2
+    },
+    "name": "Partner Test Name",
+    "description": "Partner Test Description"
+}
+###
+@partnerId = {{ createPartner.response.body.data.id }}
+
+###
+
+# Update a partner
+PUT http://localhost:3000/v1/partners/{{partnerId}}
+content-type: application/json
+
+{
+    "name": "Updated Partner Name",
+    "description": "Updated Partner Description"
+}
+
+###
+
+# Remove partner
+DELETE http://localhost:3000/v1/partners/{{partnerId}}
+
+###
+
+### Companies
+# Return all companies
+GET http://localhost:3000/v1/companies
+
+###
+
+# Return specific company
+GET http://localhost:3000/v1/companies/{{companyId}}
+
+###
+
+# Return chains by company
+GET http://localhost:3000/v1/companies/{{companyId}}/chains
+
+###
+
+# Return stores by company
+GET http://localhost:3000/v1/companies/{{companyId}}/stores
+
+###
+
+# Create a company
+# @name createCompany
+POST http://localhost:3000/v1/companies
+content-type: application/json
+
+{
+    "partnerId": "{{partnerId}}",
+    "name": "Company Name",
+    "description": "Company Description"
+}
+###
+@companyId = {{ createCompany.response.body.data.id }}
+
+###
+
+# Update a company
+PUT http://localhost:3000/v1/companies/{{companyId}}
+content-type: application/json
+
+{
+    "name": "Updated Company Name",
+    "description": "Updated Company Description"
+}
+
+###
+
+# Remove company
+DELETE http://localhost:3000/v1/companies/{{companyId}}
+
+###
+
+### Chains
+# Return all chains
+GET http://localhost:3000/v1/chains
+
+###
+
+# Return specific chain
+GET http://localhost:3000/v1/chains/{{chainId}}
+
+###
+
+# Return stores by chain
+GET http://localhost:3000/v1/chains/{{chainId}}/stores
+
+###
+
+# Return complete chain with all its stores
+GET http://localhost:3000/v1/chains/{{chainId}}/full
+
+###
+
+# Create a chain
+# @name createChain
+POST http://localhost:3000/v1/chains
+content-type: application/json
+
+{
+    "companyId": "{{companyId}}",
+    "name": "Chain Test 4",
+    "currency_code": 986,
+    "country_code": 1058
+}
+###
+@chainId = {{ createChain.response.body.data.id }}
+
+###
+
+# Update a chain
+PUT http://localhost:3000/v1/chains/{{chainId}}
+content-type: application/json
+
+{
+    "currency_code": 986
+}
+
+###
+
+# Remove chain
+DELETE http://localhost:3000/v1/chains/{{chainId}}
+
+###
+
+### Stores
+# Return all stores
+GET http://localhost:3000/v1/stores
+
+###
+
+# Return specific store
+GET http://localhost:3000/v1/stores/{{storeId}}
+
+###
+
+# Create a store
+# @name createStore
+POST http://localhost:3000/v1/stores
+content-type: application/json
+
+{
+  "chainId": "{{chainId}}",
+  "document": "02952561000167",
+  "documentTypeCode": 2,
+  "name": "Store Name",
+  "description": "Store Description",
+  "phone": "5519999780673",
+  "address": {
+    "number": 79,
+    "street": "Street Name",    
+    "city": "Limeira",
+    "state": "SP",
+    "country": "Brazil",
+    "zipCode": "12345-678"
+  }
+}
+###
+@storeId = {{ createStore.response.body.data.id }}
+
+###
+
+# Update a store
+PUT http://localhost:3000/v1/stores/{{storeId}}
+content-type: application/json
+
+{
+    "name": "Updated Store Name"
+}
+
+###
+
+# Remove store
+DELETE http://localhost:3000/v1/stores/{{storeId}}
