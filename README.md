@@ -61,7 +61,7 @@ src/
  │       └── logger.service.ts
  │
  ├── bootstrap/   # Composition Root / configuração da aplicação
- │   └── app.ts   # instancia Dispatcher, registra EventHandlers, CommandHandlers, Controllers
+ │   └── app.ts   # instancia Dispatcher, registra CommandHandlers, Controllers
  │
  └── main.ts # Ponto de entrada da aplicação (chama bootstrap/app.ts)
 
@@ -78,15 +78,13 @@ src/
 Entities → objetos do domínio (ex: User).
 Value Objects → tipos imutáveis com significado (ex: Email, CPF).
 Domain Services → lógica que não cabe em uma única entidade.
-Events → fatos consumados do domínio (ex: UserRegisteredEvent).
 Commands → intenções de negócio (ex: RegisterUserCommand).
 Repositories (interfaces) → contratos de persistência, sem implementação.
 
 ⚠️ Aqui não entra nada de framework ou infraestrutura.
 
 # 2. Application (casos de uso)
-CommandHandlers → recebem Command, usam domínio para executar, emitem Events.
-EventHandlers → reagem a Events (ex: enviar email).
+CommandHandlers → recebem Command, usam domínio para executar
 Application Services → orquestram casos de uso mais amplos (ex: autenticação, pagamentos).
 ⚠️ Aqui não há regra de negócio "pura", apenas orquestração.
 
@@ -110,7 +108,7 @@ SharedModule centraliza providers reutilizáveis.
 
 # 7. Bootstrap
 Responsável pela inicialização dos componentes do sistema
-Instancia EventDispatcher (singleton), registra todos os EventHandlers (ex: SendWelcomeEmailHandler), cria os CommandHandlers, passando repositórios e dispatcher, cria Controllers e quaisquer outros serviços da aplicação, retorna um objeto com os controllers ou serviços prontos para uso.
+Cria os CommandHandlers, passando repositórios e dispatcher, cria Controllers e quaisquer outros serviços da aplicação, retorna um objeto com os controllers ou serviços prontos para uso.
 
 ## 📌 Exemplo de fluxo na prática
 POST /users (controller na interfaces/http) recebe payload.
@@ -120,12 +118,6 @@ Cria RegisterUserCommand.
 Passa para o RegisterUserCommandHandler (application/user/command-handlers).
 
 O handler usa UserRepository (contrato do domain) → instância concreta vem da infrastructure.
-
-Ao persistir o usuário, dispara UserRegisteredEvent (domain/user/events).
-
-O EventDispatcher (domain/shared/events) publica.
-
-SendWelcomeEmailHandler (application/user/event-handlers) reage e envia o e-mail usando NodeMailerEmailService (infrastructure/email).
 
 ## 🚀 Como executar
 
@@ -138,4 +130,5 @@ SendWelcomeEmailHandler (application/user/event-handlers) reage e envia o e-mail
    npm run start:dev
    npm test
    ```
+
 
