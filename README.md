@@ -11,6 +11,8 @@ Este repositório serve como exemplo prático de como estruturar uma aplicação
 A aplicação segue o padrão CQRS, separando responsabilidades:
 
 ## 📌 Exemplo em Typescript
+
+```bash
 src/
  ├── domain/          # Núcleo do domínio (regras de negócio)
  │   ├── user/
@@ -23,7 +25,7 @@ src/
  │   │   └── services/
  │   │       └── UserDomainService.ts
  │   └── shared/
- │       └── enums/
+ │       ├── enums/
  │       └── errors/
  │
  ├── application/                # Casos de uso / Orquestração
@@ -46,6 +48,7 @@ src/
  │       ├── controllers/
  │       │   └── UserController.ts
  │       └── routes.ts
+ │
  ├── modules/      # Módulos do NestJS (composition root de cada domínio)
  │   ├── user/
  │   │   └── user.module.ts
@@ -57,11 +60,11 @@ src/
  │   └── services/
  │       └── logger.service.ts
  │
-
  ├── bootstrap/   # Composition Root / configuração da aplicação
  │   └── app.ts   # instancia Dispatcher, registra EventHandlers, CommandHandlers, Controllers
  │
  └── main.ts # Ponto de entrada da aplicação (chama bootstrap/app.ts)
+
 
  ## 📌 Base do CQRS
  - **Commands:** Alteram o estado da aplicação (ex: criar ou atualizar um usuário).
@@ -135,3 +138,4 @@ SendWelcomeEmailHandler (application/user/event-handlers) reage e envia o e-mail
    npm run start:dev
    npm test
    ```
+
