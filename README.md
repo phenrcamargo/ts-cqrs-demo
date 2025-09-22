@@ -64,7 +64,7 @@ src/
  │   └── app.ts   # instancia Dispatcher, registra CommandHandlers, Controllers
  │
  └── main.ts # Ponto de entrada da aplicação (chama bootstrap/app.ts)
-
+```
 
  ## 📌 Base do CQRS
  - **Commands:** Alteram o estado da aplicação (ex: criar ou atualizar um usuário).
@@ -130,5 +130,6 @@ O handler usa UserRepository (contrato do domain) → instância concreta vem da
    npm run start:dev
    npm test
    ```
+
 
 
