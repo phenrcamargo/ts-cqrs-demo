@@ -123,13 +123,13 @@ O handler usa UserRepository (contrato do domain) → instância concreta vem da
 
 1. Clone o repositório:
    ```bash
-   git clone https://github.com/seu-usuario/ts-cqrs-demo.git
    cd ts-cqrs-demo
    docker compose up -d
    npm ci
    npm run start:dev
    npm test
    ```
+
 
 
 
