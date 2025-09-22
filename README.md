@@ -74,7 +74,7 @@ src/
 - **Infrastructure:** Implementações de persistência.
 
 ## 📌 O que vai em cada camada
-# 1. Domain (coração do sistema)
+### 1. Domain (coração do sistema)
 Entities → objetos do domínio (ex: User).
 Value Objects → tipos imutáveis com significado (ex: Email, CPF).
 Domain Services → lógica que não cabe em uma única entidade.
@@ -83,30 +83,30 @@ Repositories (interfaces) → contratos de persistência, sem implementação.
 
 ⚠️ Aqui não entra nada de framework ou infraestrutura.
 
-# 2. Application (casos de uso)
+### 2. Application (casos de uso)
 CommandHandlers → recebem Command, usam domínio para executar
 Application Services → orquestram casos de uso mais amplos (ex: autenticação, pagamentos).
 ⚠️ Aqui não há regra de negócio "pura", apenas orquestração.
 
-# 3. Infrastructure
+### 3. Infrastructure
 Implementações concretas dos contratos do domain (ex: UserRepositoryImpl com TypeORM, Prisma ou Sequelize).
 Integrações externas (ex: serviços de e-mail, cache, mensageria).
 Configuração de banco, RabbitMQ, Kafka, etc.
 
-# 4. Interfaces
+### 4. Interfaces
 Camada mais externa: controllers HTTP, CLI, GraphQL, WebSocket, etc.
 Essa camada converte entrada/saída para objetos do application/domain.
 
-# 5. Modules
+### 5. Modules
 Modulos do NestJS separados por contexto (user, auth, etc).
 Cada módulo do NestJS funciona como composition root de um contexto do domínio.
 O restante da aplicação (domain, application, infrastructure, interfaces) continua organizado segundo DDD e Arquitetura Gritante.
 
-# 6. Shared
+### 6. Shared
 Camada com serviços e componentes utilizados em vários módulos
 SharedModule centraliza providers reutilizáveis.
 
-# 7. Bootstrap
+### 7. Bootstrap
 Responsável pela inicialização dos componentes do sistema
 Cria os CommandHandlers, passando repositórios e dispatcher, cria Controllers e quaisquer outros serviços da aplicação, retorna um objeto com os controllers ou serviços prontos para uso.
 
@@ -130,6 +130,7 @@ O handler usa UserRepository (contrato do domain) → instância concreta vem da
    npm run start:dev
    npm test
    ```
+
 
 
 
